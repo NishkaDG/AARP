@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Oculus/Avatar2/Example/Scenes/MirrorScene/MirrorScene.unity
     guid: 9f2e1693a4f24bc498477b3dfeb166aa
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 9f1d7eacceaf94e42b155f9fda650d27
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 664db510d2c0bbb4ea928842bcafb6f5, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3446b0b0b7286b24ab9f2f56956ddac0, type: 2}
