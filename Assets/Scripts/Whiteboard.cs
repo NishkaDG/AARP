@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections;
+using System.IO;
 using UnityEngine;
 
 public class Whiteboard : MonoBehaviour
@@ -8,8 +11,9 @@ public class Whiteboard : MonoBehaviour
 
     public int penSize = 2;
 
-    private Texture2D texture;
+    public Texture2D texture;
     public Color color;
+    private ArrayList userCapture;
 
     private bool touching, touchingLast;
 
@@ -24,8 +28,12 @@ public class Whiteboard : MonoBehaviour
     //this, we will be multiplying our texture sizes by this constant.
     private const int WHITEBOARD_SCALE = 10;
 
+    private float startTime;
+    private bool hasPrinted = false;
+
     public void Start()
     {
+        Debug.LogWarning("testwarn");
         //Scale the texture on the whiteboard based on the size of the whiteboard.
         texturesSizeHorizontal = (int)(transform.localScale.x * WHITEBOARD_SCALE * TEXTURE_SCALE);
         texturesSizeVertical = (int)(transform.localScale.z * WHITEBOARD_SCALE * TEXTURE_SCALE);
@@ -36,7 +44,10 @@ public class Whiteboard : MonoBehaviour
         renderer.material.mainTexture = this.texture;
 
         //Set the color of our pen to black
-        color = Color.black;
+        color = Color.red;
+        this.userCapture = new ArrayList();
+        this.startTime =  Time.time;
+        
 
     }
 
@@ -44,10 +55,46 @@ public class Whiteboard : MonoBehaviour
     void Update()
     {
 
+        DrawToPoint(out var x, out var y, this.lastX, this.lastY, this.posX, this.posY, touchingLast, this.color);
+
+        //Set lastX and lastY coordinates for filling the space between the points
+        //placed on the whiteboard.
+        this.lastX = (float)x;
+        this.lastY = (float)y;
+        
+        if (this.touching)
+        {
+            this.userCapture.Add((posX, posY, !this.touchingLast));
+        }
+
+        this.touchingLast = this.touching;
+
+        if ((Time.time - this.startTime >= 60) && !hasPrinted)
+        {
+            
+            //var captureString = "";
+            foreach (var capture in this.userCapture)
+            {
+                var capture2 = (ValueTuple<float, float, bool>) capture;
+                //var captureString = "(" + capture2.Item1 + ", " + capture2.Item2 + ")\n";
+                Debug.LogError(capture2);
+            }
+
+            this.hasPrinted = true;
+
+        }
+
+    }
+
+    public void DrawToPoint(out int x, out int y, float lastX, float lastY, float posX, float posY, bool touchingLast, Color color)
+    {
         //DrawCircle method draws a circle from the top left of given coordinates, 
         //but we want the circle to be centered at the given coordinates.
-        int x = (int)(posX * texturesSizeHorizontal - (penSize / 2));
-        int y = (int)(posY * texturesSizeVertical - (penSize / 2));
+        x = (int) (posX * texturesSizeHorizontal - (penSize / 2));
+        y = (int) (posY * texturesSizeVertical - (penSize / 2));
+       
+        //string logMessage = String.Format("{0}, {1}, {2}",  DateTime.Now, posX, posY); 
+        //Debug.LogWarning(logMessage);
 
         //If hand is in contact with the whiteboard, start drawing.
         if (touchingLast)
@@ -59,22 +106,13 @@ public class Whiteboard : MonoBehaviour
             //This loop allows us to interpolate between those points using Lerp.
             for (float t = 0.01f; t < 1.00f; t += 0.01f)
             {
-                int lerpX = (int)Mathf.Lerp(lastX, (float)x, t);
-                int lerpY = (int)Mathf.Lerp(lastY, (float)y, t);
+                int lerpX = (int) Mathf.Lerp(lastX, (float) x, t);
+                int lerpY = (int) Mathf.Lerp(lastY, (float) y, t);
                 texture.DrawCircle(color, lerpX, lerpY, penSize);
             }
 
             texture.Apply();
-
         }
-
-        //Set lastX and lastY coordinates for filling the space between the points
-        //placed on the whiteboard.
-        this.lastX = (float)x;
-        this.lastY = (float)y;
-
-        this.touchingLast = this.touching;
-
     }
 
     //ToggleTouch allows the WhiteboardPen.cs script to tell
@@ -90,6 +128,7 @@ public class Whiteboard : MonoBehaviour
     {
         this.posX = x;
         this.posY = y;
+        
     }
 
 }
