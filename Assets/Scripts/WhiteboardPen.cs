@@ -1,4 +1,7 @@
 
+using System;
+using System.Collections;
+using Oculus.Interaction.Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +19,13 @@ public class WhiteboardPen : MonoBehaviour
 
     private Vector3 originPoint;
     private Vector3 targetPoint;
+    private float _lastX;
+    private float _lastY;
+    private ArrayList _points;
+    private Color _color;
+    private bool _playCapture;
+    private bool _recording;
+    private float _timeBetweenPinch;
 
     private const int WHITEBOARD_LAYER = 10;
 
@@ -24,6 +34,29 @@ public class WhiteboardPen : MonoBehaviour
         //Get the scripts that hold information about hand tracking
         m_hand = GetComponent<OVRHand>();
         m_skeleton = GetComponent<OVRSkeleton>();
+    }
+    
+    void Start()
+    {
+        this._lastX = 0.0f;
+        this._lastY = 0.0f;
+        this._points = new ArrayList();
+        TextAsset f = (TextAsset)Resources.Load("UserCapture/userCapture");
+        String fileText = System.Text.Encoding.UTF8.GetString(f.bytes);
+        string[] csvRows = fileText.Split("\n");
+        foreach (var row in csvRows)
+        {
+            var row2 = row.Split(",");
+            var x = float.Parse(row2[0]);
+            var y = float.Parse(row2[1]);
+            var newLine = bool.Parse(row2[2]);
+            _points.Add((x, y, newLine));
+        }
+        Debug.LogWarning(fileText);
+        this._color = Settings.NormalColor;
+        this._playCapture = false;
+        this._recording = false;
+        this._timeBetweenPinch = Time.time;
     }
 
     // Update is called once per frame
@@ -51,6 +84,14 @@ public class WhiteboardPen : MonoBehaviour
 
         Vector3 direction = Vector3.Normalize(targetPoint - originPoint);
         float distance = Vector3.Distance(originPoint, targetPoint);
+        
+        if ((Time.time - _timeBetweenPinch > 1) &&
+            m_hand.GetFingerIsPinching(OVRHand.HandFinger.Pinky))
+        {
+            this._recording = !this._recording;
+            _timeBetweenPinch = Time.time;
+            this._color = (this._recording) ? Settings.RecordingColor : Settings.NormalColor;
+        }
 
         //Cast a ray starting from the second index finger joint to the tip of the index finger.
         //Only check for objects that are in the whiteboard layer.
@@ -62,6 +103,11 @@ public class WhiteboardPen : MonoBehaviour
             //touch.textureCoord gives us the texture coordinates at which our raycast
             //intersected the whiteboard. We can use this to tell the whiteboard where to
             //render the next circle.
+            if (this._recording)
+            {
+                Debug.LogWarning((ValueTuple<float, float, bool>)(touch.textureCoord.x, touch.textureCoord.y, true));
+            }
+            
             whiteboard.SetTouchPosition(touch.textureCoord.x, touch.textureCoord.y);
 
             //If the raycast intersects the board, it means we are touching the board
@@ -72,15 +118,12 @@ public class WhiteboardPen : MonoBehaviour
             if (whiteboard != null)
             {
                 //If the raycast no longer intersects, stop drawing on the board.
+                if (this._recording)
+                {
+                    Debug.LogWarning((ValueTuple<float, float, bool>)(0.0f, 0.0f, false));
+                }
                 whiteboard.ToggleTouch(false);
             }
-        }
-
-
-        //If your thumb touches your pinky, reset the scene.
-        if (m_hand.GetFingerIsPinching(OVRHand.HandFinger.Pinky))
-        {
-            SceneManager.LoadScene("WhiteboardScene");
         }
     }
 }

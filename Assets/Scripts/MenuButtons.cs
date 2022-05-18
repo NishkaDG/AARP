@@ -5,11 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum Cases
-{
-    C1, C2
-}
-
 public class MenuButtons : MonoBehaviour
 {
     public static Cases CurrentCase;

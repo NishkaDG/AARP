@@ -1,13 +1,17 @@
 ﻿
 using System;
 using System.Collections;
+using System.Drawing;
 using System.IO;
 using UnityEngine;
+using Color = UnityEngine.Color;
 
 public class Whiteboard : MonoBehaviour
 {
     private int texturesSizeHorizontal;
     private int texturesSizeVertical;
+
+    private bool _isRecording;
 
     public int penSize = 2;
 
@@ -33,7 +37,6 @@ public class Whiteboard : MonoBehaviour
 
     public void Start()
     {
-        Debug.LogWarning("testwarn");
         //Scale the texture on the whiteboard based on the size of the whiteboard.
         texturesSizeHorizontal = (int)(transform.localScale.x * WHITEBOARD_SCALE * TEXTURE_SCALE);
         texturesSizeVertical = (int)(transform.localScale.z * WHITEBOARD_SCALE * TEXTURE_SCALE);
@@ -44,10 +47,11 @@ public class Whiteboard : MonoBehaviour
         renderer.material.mainTexture = this.texture;
 
         //Set the color of our pen to black
-        color = Color.red;
+        color = Settings.NormalColor;
         this.userCapture = new ArrayList();
-        this.startTime =  Time.time;
         
+        // We don't want to record right away
+        this._isRecording = false;
 
     }
 
@@ -55,34 +59,36 @@ public class Whiteboard : MonoBehaviour
     void Update()
     {
 
-        DrawToPoint(out var x, out var y, this.lastX, this.lastY, this.posX, this.posY, touchingLast, this.color);
+        //DrawCircle method draws a circle from the top left of given coordinates, 
+        //but we want the circle to be centered at the given coordinates.
+        int x = (int)(posX * texturesSizeHorizontal - (penSize / 2));
+        int y = (int)(posY * texturesSizeVertical - (penSize / 2));
+
+        //If hand is in contact with the whiteboard, start drawing.
+        if (touchingLast)
+        {
+            texture.DrawCircle(color, x, y, penSize);
+
+            //If we move our finger too fast on the whiteboard, Update can't keep
+            //up and our line looks choppy.
+            //This loop allows us to interpolate between those points using Lerp.
+            for (float t = 0.01f; t < 1.00f; t += 0.01f)
+            {
+                int lerpX = (int)Mathf.Lerp(lastX, (float)x, t);
+                int lerpY = (int)Mathf.Lerp(lastY, (float)y, t);
+                texture.DrawCircle(color, lerpX, lerpY, penSize);
+            }
+
+            texture.Apply();
+
+        }
 
         //Set lastX and lastY coordinates for filling the space between the points
         //placed on the whiteboard.
         this.lastX = (float)x;
         this.lastY = (float)y;
-        
-        if (this.touching)
-        {
-            this.userCapture.Add((posX, posY, !this.touchingLast));
-        }
 
         this.touchingLast = this.touching;
-
-        if ((Time.time - this.startTime >= 60) && !hasPrinted)
-        {
-            
-            //var captureString = "";
-            foreach (var capture in this.userCapture)
-            {
-                var capture2 = (ValueTuple<float, float, bool>) capture;
-                //var captureString = "(" + capture2.Item1 + ", " + capture2.Item2 + ")\n";
-                Debug.LogError(capture2);
-            }
-
-            this.hasPrinted = true;
-
-        }
 
     }
 
