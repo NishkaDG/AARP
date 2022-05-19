@@ -32,7 +32,8 @@ public class AutoWhiteboardWriter : MonoBehaviour
         this._lastX = 0.0f;
         this._lastY = 0.0f;
         this._points = new ArrayList();
-        TextAsset f = (TextAsset)Resources.Load("UserCapture/userCapture");
+        TextAsset f = (TextAsset)Resources.Load(Settings.UserCaptureFiles[MenuButtons.CurrentCase]);
+        // TextAsset f = (TextAsset)Resources.Load("UserCapture/Shapes");
         String fileText = System.Text.Encoding.UTF8.GetString(f.bytes);
         string[] csvRows = fileText.Split("\n");
         foreach (var row in csvRows)
@@ -52,6 +53,12 @@ public class AutoWhiteboardWriter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Settings.WhiteboardPlaybackState[transform.parent.name][MenuButtons.CurrentCase] == false)
+        {
+            return;
+        } 
+        
         if ((Time.time - _timeBetweenPinch > 1) && _mSkeleton.IsInitialized &&
             _mHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
         {
