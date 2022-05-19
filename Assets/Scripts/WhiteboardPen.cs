@@ -23,7 +23,7 @@ public class WhiteboardPen : MonoBehaviour
     private float _lastY;
     private ArrayList _points;
     private Color _color;
-    private bool _playCapture;
+    private bool _playback;
     private bool _recording;
     private float _timeBetweenPinch;
 
@@ -54,7 +54,7 @@ public class WhiteboardPen : MonoBehaviour
         }
         Debug.LogWarning(fileText);
         this._color = Settings.NormalColor;
-        this._playCapture = false;
+        this._playback = false;
         this._recording = false;
         this._timeBetweenPinch = Time.time;
     }
@@ -90,7 +90,6 @@ public class WhiteboardPen : MonoBehaviour
         {
             this._recording = !this._recording;
             _timeBetweenPinch = Time.time;
-            this._color = (this._recording) ? Settings.RecordingColor : Settings.NormalColor;
         }
 
         //Cast a ray starting from the second index finger joint to the tip of the index finger.
@@ -105,9 +104,11 @@ public class WhiteboardPen : MonoBehaviour
             //render the next circle.
             if (this._recording)
             {
-                Debug.LogWarning((ValueTuple<float, float, bool>)(touch.textureCoord.x, touch.textureCoord.y, true));
+                Debug.LogWarning("RECORDING: " + (ValueTuple<float, float, bool>)(touch.textureCoord.x,
+                    touch.textureCoord.y, !whiteboard.GetTouch()));
             }
             
+            whiteboard.SetColor((_recording) ? Settings.RecordingColor : Settings.NormalColor);
             whiteboard.SetTouchPosition(touch.textureCoord.x, touch.textureCoord.y);
 
             //If the raycast intersects the board, it means we are touching the board
@@ -117,11 +118,6 @@ public class WhiteboardPen : MonoBehaviour
         {
             if (whiteboard != null)
             {
-                //If the raycast no longer intersects, stop drawing on the board.
-                if (this._recording)
-                {
-                    Debug.LogWarning((ValueTuple<float, float, bool>)(0.0f, 0.0f, false));
-                }
                 whiteboard.ToggleTouch(false);
             }
         }

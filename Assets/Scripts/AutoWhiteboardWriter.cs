@@ -14,7 +14,7 @@ public class AutoWhiteboardWriter : MonoBehaviour
     
     private float _lastX, _lastY;
 
-    private bool _playCapture;
+    private bool _playback;
 
     private Color _color;
     private float _timeBetweenPinch;
@@ -45,7 +45,7 @@ public class AutoWhiteboardWriter : MonoBehaviour
         }
         Debug.LogWarning(fileText);
         this._color = Settings.RecordingColor;
-        this._playCapture = false;
+        this._playback = false;
         this._timeBetweenPinch = Time.time;
     }
 
@@ -55,11 +55,11 @@ public class AutoWhiteboardWriter : MonoBehaviour
         if ((Time.time - _timeBetweenPinch > 1) && _mSkeleton.IsInitialized &&
             _mHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
         {
-            this._playCapture = !this._playCapture;
+            this._playback = !this._playback;
             _timeBetweenPinch = Time.time;
         }
         
-        if (this._playCapture && _currentIndex < _points.Count)
+        if (this._playback && _currentIndex < _points.Count)
         {
             var point = (ValueTuple<float, float, bool>) _points[_currentIndex];
             float posX = point.Item1;

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Drawing;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Color = UnityEngine.Color;
 
 public class Whiteboard : MonoBehaviour
@@ -49,6 +50,9 @@ public class Whiteboard : MonoBehaviour
         //Set the color of our pen to black
         color = Settings.NormalColor;
         this.userCapture = new ArrayList();
+
+        this.touching = false;
+        this.touchingLast = false;
         
         // We don't want to record right away
         this._isRecording = false;
@@ -58,6 +62,12 @@ public class Whiteboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Go back to main menu
+        if (OVRInput.GetUp(OVRInput.Button.Start))
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
 
         //DrawCircle method draws a circle from the top left of given coordinates, 
         //but we want the circle to be centered at the given coordinates.
@@ -128,6 +138,11 @@ public class Whiteboard : MonoBehaviour
         this.touching = touching;
     }
 
+    public bool GetTouch()
+    {
+        return this.touching;
+    }
+
     //SetTouchPosition takes in the coordinates at which our whiteboard
     //pen intersects the board.
     public void SetTouchPosition(float x, float y)
@@ -135,6 +150,11 @@ public class Whiteboard : MonoBehaviour
         this.posX = x;
         this.posY = y;
         
+    }
+
+    public void SetColor(Color color)
+    {
+        this.color = color;
     }
 
 }
