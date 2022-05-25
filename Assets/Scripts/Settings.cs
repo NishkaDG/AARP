@@ -24,7 +24,7 @@ public static class Settings
     {
         {"User Wall", new() {
             {Cases.C1, false},
-            {Cases.C2, false},
+            {Cases.C2, true},
             {Cases.C3, true},
             {Cases.C4, true}
         }},
