@@ -62,6 +62,7 @@ public class AutoWhiteboardWriter : MonoBehaviour
         if ((Time.time - _timeBetweenPinch > 1) && _mSkeleton.IsInitialized &&
             _mHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
         {
+            Debug.LogWarning("pinching index");
             this._playback = !this._playback;
             _timeBetweenPinch = Time.time;
         }

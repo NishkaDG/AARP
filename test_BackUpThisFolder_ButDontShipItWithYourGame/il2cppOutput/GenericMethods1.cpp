@@ -174,8 +174,6 @@ struct EqualityComparer_1_tBE1317F8F4DBC4095F4B448348A5C7117F278200;
 struct EqualityComparer_1_t19E2B3114D1E026A8C6BE5EA53341B8277D18A76;
 // System.Collections.Generic.EqualityComparer`1<OvrAvatarDriver/PoseFrame>
 struct EqualityComparer_1_t5367F5834255A0733EEEB1D6B6183441FD26E990;
-// System.Collections.Generic.EqualityComparer`1<Oculus.Avatar2.OvrAvatarEntity/SkeletonJoint>
-struct EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4;
 // System.Func`2<System.Single,System.Single>
 struct Func_2_t2A7432CC4F64D0DF6D8629208B154CF139B39AF2;
 // System.Collections.Generic.IComparer`1<System.ArraySegment`1<System.Byte>>
@@ -3053,17 +3051,6 @@ struct EqualityComparer_1_t5367F5834255A0733EEEB1D6B6183441FD26E990_StaticFields
 {
 	// System.Collections.Generic.EqualityComparer`1<T> modreq(System.Runtime.CompilerServices.IsVolatile) System.Collections.Generic.EqualityComparer`1::defaultComparer
 	EqualityComparer_1_t5367F5834255A0733EEEB1D6B6183441FD26E990* ___defaultComparer_0;
-};
-
-// System.Collections.Generic.EqualityComparer`1<Oculus.Avatar2.OvrAvatarEntity/SkeletonJoint>
-struct EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4  : public RuntimeObject
-{
-};
-
-struct EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4_StaticFields
-{
-	// System.Collections.Generic.EqualityComparer`1<T> modreq(System.Runtime.CompilerServices.IsVolatile) System.Collections.Generic.EqualityComparer`1::defaultComparer
-	EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4* ___defaultComparer_0;
 };
 
 // System.Collections.ObjectModel.ReadOnlyCollection`1<System.Reflection.CustomAttributeNamedArgument>
@@ -30825,22 +30812,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Array_IndexOfImpl_TisPoseFrame_t2CE92
 		NullCheck(L_0);
 		int32_t L_5;
 		L_5 = VirtualFuncInvoker4< int32_t, PoseFrameU5BU5D_tA3769DB28E6F17B58F7867BCD024E50373BC4463*, PoseFrame_t2CE9210CCB95C552FEBC5A04A358C1D2F07ED1BD, int32_t, int32_t >::Invoke(10 /* System.Int32 System.Collections.Generic.EqualityComparer`1<OvrAvatarDriver/PoseFrame>::IndexOf(T[],T,System.Int32,System.Int32) */, L_0, L_1, L_2, L_3, L_4);
-		return L_5;
-	}
-}
-// System.Int32 System.Array::IndexOfImpl<Oculus.Avatar2.OvrAvatarEntity/SkeletonJoint>(T[],T,System.Int32,System.Int32)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Array_IndexOfImpl_TisSkeletonJoint_t8432BAB1392C9E8B7C45151FC885F6E4C97743C6_mA641A4890648BE966DA79DF4B767F96443304586_gshared (SkeletonJointU5BU5D_t611FDBF145C82457276A7F52C0674F609052E1B8* ___array0, SkeletonJoint_t8432BAB1392C9E8B7C45151FC885F6E4C97743C6 ___value1, int32_t ___startIndex2, int32_t ___count3, const RuntimeMethod* method) 
-{
-	{
-		EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4* L_0;
-		L_0 = ((  EqualityComparer_1_tEF3779928E7FE30126120BEEE45CE1B8130974C4* (*) (const RuntimeMethod*))il2cpp_codegen_get_method_pointer(il2cpp_rgctx_method(method->rgctx_data, 0)))(il2cpp_rgctx_method(method->rgctx_data, 0));
-		SkeletonJointU5BU5D_t611FDBF145C82457276A7F52C0674F609052E1B8* L_1 = ___array0;
-		SkeletonJoint_t8432BAB1392C9E8B7C45151FC885F6E4C97743C6 L_2 = ___value1;
-		int32_t L_3 = ___startIndex2;
-		int32_t L_4 = ___count3;
-		NullCheck(L_0);
-		int32_t L_5;
-		L_5 = VirtualFuncInvoker4< int32_t, SkeletonJointU5BU5D_t611FDBF145C82457276A7F52C0674F609052E1B8*, SkeletonJoint_t8432BAB1392C9E8B7C45151FC885F6E4C97743C6, int32_t, int32_t >::Invoke(10 /* System.Int32 System.Collections.Generic.EqualityComparer`1<Oculus.Avatar2.OvrAvatarEntity/SkeletonJoint>::IndexOf(T[],T,System.Int32,System.Int32) */, L_0, L_1, L_2, L_3, L_4);
 		return L_5;
 	}
 }

@@ -41,18 +41,18 @@ public class WhiteboardPen : MonoBehaviour
         this._lastX = 0.0f;
         this._lastY = 0.0f;
         this._points = new ArrayList();
-        TextAsset f = (TextAsset)Resources.Load("UserCapture/userCapture");
-        String fileText = System.Text.Encoding.UTF8.GetString(f.bytes);
-        string[] csvRows = fileText.Split("\n");
-        foreach (var row in csvRows)
-        {
-            var row2 = row.Split(",");
-            var x = float.Parse(row2[0]);
-            var y = float.Parse(row2[1]);
-            var newLine = bool.Parse(row2[2]);
-            _points.Add((x, y, newLine));
-        }
-        Debug.LogWarning(fileText);
+        // TextAsset f = (TextAsset)Resources.Load("UserCapture/userCapture");
+        // String fileText = System.Text.Encoding.UTF8.GetString(f.bytes);
+        // string[] csvRows = fileText.Split("\n");
+        // foreach (var row in csvRows)
+        // {
+        //     var row2 = row.Split(",");
+        //     var x = float.Parse(row2[0]);
+        //     var y = float.Parse(row2[1]);
+        //     var newLine = bool.Parse(row2[2]);
+        //     _points.Add((x, y, newLine));
+        // }
+        // Debug.LogWarning(fileText);
         this._color = Settings.NormalColor;
         this._playback = false;
         this._recording = false;
@@ -88,6 +88,7 @@ public class WhiteboardPen : MonoBehaviour
         if ((Time.time - _timeBetweenPinch > 1) &&
             m_hand.GetFingerIsPinching(OVRHand.HandFinger.Pinky))
         {
+            Debug.LogWarning("pinching pinky");
             this._recording = !this._recording;
             _timeBetweenPinch = Time.time;
         }
