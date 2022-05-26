@@ -44,7 +44,7 @@ public class AutoWhiteboardWriter : MonoBehaviour
             var newLine = bool.Parse(row2[2]);
             _points.Add((x, y, newLine));
         }
-        Debug.LogWarning(fileText);
+        // Debug.LogWarning(fileText);
         this._color = Settings.RecordingColor;
         this._playback = false;
         this._timeBetweenPinch = Time.time;
@@ -62,8 +62,15 @@ public class AutoWhiteboardWriter : MonoBehaviour
         if ((Time.time - _timeBetweenPinch > 1) && _mSkeleton.IsInitialized &&
             _mHand.GetFingerIsPinching(OVRHand.HandFinger.Index))
         {
+            Debug.LogWarning("pinching index");
             this._playback = !this._playback;
             _timeBetweenPinch = Time.time;
+            Debug.LogWarning(this._playback);
+        }
+
+        if (this._playback)
+        {
+            Debug.LogWarning((_currentIndex, _points.Count));
         }
         
         if (this._playback && _currentIndex < _points.Count)
