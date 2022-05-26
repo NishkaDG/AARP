@@ -90,6 +90,7 @@ public class WhiteboardPen : MonoBehaviour
         {
             this._recording = !this._recording;
             _timeBetweenPinch = Time.time;
+            Debug.LogWarning(this._recording ? "RECORDING HAS STARTED" : "RECORDING HAS STOPPED");
         }
 
         //Cast a ray starting from the second index finger joint to the tip of the index finger.
