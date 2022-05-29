@@ -58,9 +58,9 @@ public class Whiteboard : MonoBehaviour
         this._isRecording = false;
         
         Debug.LogWarning("drawing user box");
-        this.DrawToPoint(out var x, out var y, 0f, 0f, 1f, 0.6f, false, Color.cyan);
-        this.DrawToPoint(out var x2, out var y2, x, y, 0.6f, 0.6f, true, Color.cyan);
-        this.DrawToPoint(out var x3, out var y3, x2, y2, 0.6f, 1f, true, Color.cyan);
+        this.DrawToPoint(out var x, out var y, 0f, 0f, 1f, 0.67f, false, Color.cyan);
+        this.DrawToPoint(out var x2, out var y2, x, y, 0.67f, 0.67f, true, Color.cyan);
+        this.DrawToPoint(out var x3, out var y3, x2, y2, 0.67f, 1f, true, Color.cyan);
 
     }
 

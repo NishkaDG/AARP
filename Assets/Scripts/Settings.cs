@@ -14,25 +14,19 @@ public static class Settings
 
     public static readonly Dictionary<Cases, string> UserCaptureFiles = new()
     {
-        {Cases.C1, "UserCapture/Shapes"},
-        {Cases.C2, "UserCapture/Math"},
-        {Cases.C3, "UserCapture/Shapes"},
-        {Cases.C4, "UserCapture/Math"}
+        {Cases.C1, "UserCapture/Shapes.0"},
+        {Cases.C2, "UserCapture/Shapes.1"}
     };
     
     public static readonly Dictionary<string, Dictionary<Cases, bool>> WhiteboardPlaybackState = new()
     {
         {"User Wall", new() {
             {Cases.C1, false},
-            {Cases.C2, true},
-            {Cases.C3, true},
-            {Cases.C4, true}
+            {Cases.C2, true}
         }},
         {"Dummy Wall", new() {
             {Cases.C1, true},
-            {Cases.C2, true},
-            {Cases.C3, false},
-            {Cases.C4, false}
+            {Cases.C2, true}
         }},
     };
 }
