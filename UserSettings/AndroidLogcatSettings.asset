@@ -1,101 +1,53 @@
 {
-    "m_SelectedDeviceId": "1WMHHA6AW51516",
+    "m_SelectedDeviceId": "1WMHHB61HL1491",
     "m_SelectedPackage": {
-        "deviceId": "1WMHHA6AW51516",
+        "deviceId": "1WMHHB61HL1491",
         "name": "com.SaNiRa.AARP",
-        "processId": 19282,
+        "processId": 10809,
         "exited": false
     },
     "m_SelectedPriority": 3,
     "m_KnownPackagesForSerialization": [
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 17811,
+            "processId": 9034,
             "exited": true
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 18320,
+            "processId": 9459,
             "exited": true
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 18907,
+            "processId": 10008,
             "exited": true
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 19456,
+            "processId": 9099,
             "exited": true
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 4768,
+            "processId": 9458,
             "exited": true
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.oculus.shellenv",
-            "processId": 3458,
+            "processId": 3634,
             "exited": false
         },
         {
-            "deviceId": "1WMHHA6AW51516",
+            "deviceId": "1WMHHB61HL1491",
             "name": "com.SaNiRa.AARP",
-            "processId": 5977,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 10723,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 11858,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 13065,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 13830,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 17202,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 18066,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 18510,
-            "exited": false
-        },
-        {
-            "deviceId": "1WMHHA6AW51516",
-            "name": "com.SaNiRa.AARP",
-            "processId": 19282,
+            "processId": 10809,
             "exited": false
         }
     ],
